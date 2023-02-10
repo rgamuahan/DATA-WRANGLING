@@ -1,0 +1,103 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+# creating a tibble
+
+```{r}
+tribble(~number, ~letter,   ~greek,
+        1,     "a",  "alpha",
+        2,     "b",   "beta",
+        3,     "c",  "gamma")
+```
+
+```{r}
+y <- tibble(number = c(1, 2, 3), 
+            letter = c("a", "b", "c"),
+            greek = c("alpha", "beta", "gamma"))
+```
+
+# convert a data frame to a tibble
+
+```{r}
+x <- iris # Iris is still a data frame
+```
+
+```{r}
+x <- as_tibble(x) # This will make x as a tibble
+```
+
+```{r}
+class(x) # Verifying if x is already a tibble
+```
+
+# Convert a tibble to a data frame 
+
+```{r}
+z <- table1
+```
+
+```{r}
+z
+```
+
+```{r}
+class(z)
+```
+
+```{r}
+z <- as.data.frame(table1)
+```
+
+#  Inspect every cell of a tibble
+
+```{r}
+s <- storms
+```
+
+```{r}
+View(storms)
+```
+
+# Spread a pair of columns into a field of cells
+
+```{r}
+table2 #untidy data
+```
+
+```{r}
+table2_tidy <- table2 %>% # and them
+  spread(key = type, value = count)
+table2_tidy
+```
+
+# Gather a field of cells into a pair of columns
+
+```{r}
+table4a
+```
+```{r}
+table4a %>% 
+  gather(key = "year", value = "cases", 2:3)
+```
+
+![](wide-to-long.png)
+
+# Separate a column into new columns
+
+```{r}
+table3
+```
+
+```{r}
+table3_separate <- table3 %>% 
+  separate(col = rate, into = c("cases", "population"), 
+           sep = "/")
+table3
+```
+
